@@ -1,6 +1,14 @@
 var builder = require('botbuilder');
 var restify = require('restify');
 
+// *** BOT SETUP ***
+
+// Setup Restify Server
+var server = restify.createServer();
+server.listen(process.env.port || process.env.PORT || 3978, function () {
+    console.log('%s listening to %s', server.name, server.url);
+});
+
 // Create the connector:
 // ConsoleConnector allows us to communicate with our bot directly via the command window.
 // var connector = new builder.ConsoleConnector().listen();
@@ -11,6 +19,7 @@ var connector = new builder.ChatConnector();
 // Create the bot:
 // UniversalBot works with all connectors and all channels.
 var bot = new builder.UniversalBot(connector);
+server.post('/api/messages', connector.listen());
 
 // Add in the dialog:
 // Dialogs have names that act like a path, this is our 'root' dialog.
@@ -35,9 +44,3 @@ bot.dialog('/', [
         session.send('Hello, ' + result.response + '!')
     }
 ]);
-
-var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log('%s listening to %s', server.name, server.url);
-});
-server.post('/api/messages', connector.listen());

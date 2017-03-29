@@ -1,5 +1,5 @@
 # NodeChatBot
-Basic ChatBot sample for the Microsoft Bot Framework, built with Node.js
+Basic ChatBot samples for the Microsoft Bot Framework, built with Node.js
 
 ## Follow Me
 * Twitter: [@ActiveNick](http://twitter.com/ActiveNick)
